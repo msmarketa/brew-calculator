@@ -2,11 +2,13 @@ let coffeeBeans = document.getElementById("coffee-beans");
 let water = document.getElementById("water");
 let ratio = document.getElementById("ratio");
 let coffeeYield = document.getElementById("coffee-yield");
+let timer = document.getElementById("timer");
 
 coffeeBeans.value = 8;
 water.value = 128;
 ratio.value = 16;
 coffeeYield.value = water.value * 0.9;
+timer.value = 10;
 
 function countCoffeeYield() {
   coffeeYield.value = water.value * 0.9;

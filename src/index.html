@@ -29,6 +29,7 @@
               class="form-control"
               aria-label="Coffee beans"
               aria-describedby="coffee-beans"
+              min="1"
             />
             <span class="input-group-text" id="coffee-beans">g</span>
           </div>
@@ -42,6 +43,7 @@
               class="form-control"
               aria-label="Water"
               aria-describedby="water"
+              min="1"
             />
             <span class="input-group-text" id="water">ml</span>
           </div>
@@ -55,6 +57,7 @@
               class="form-control"
               aria-label="Ratio"
               aria-describedby="ratio"
+              min="1"
             />
             <span class="input-group-text" id="ratio">:1</span>
           </div>
@@ -68,8 +71,41 @@
               class="form-control"
               aria-label="Coffee yield"
               aria-describedby="coffee-yield"
+              min="1"
             />
             <span class="input-group-text" id="coffee-yield">ml</span>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-12 col-sm-6 col-lg-3 mt-3">
+          <label for="timer" class="form-label">Timer</label>
+          <div class="input-group">
+            <input
+              id="timer"
+              type="number"
+              class="form-control"
+              aria-label="Timer"
+              aria-describedby="timer"
+              min="1"
+              step="0.5"
+            />
+            <span class="input-group-text" id="timer">min</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4 mt-3 align-self-end">
+          <div class="input-group">
+            <input 
+              id="countdown"
+              type="number"
+              class="form-control"
+              aria-label="Countdown"
+              aria-describedby="countdown"
+              disabled
+            />
+            <button class="btn btn-success" type="button">Start</button>
+            <button class="btn btn-danger" type="button">Stop</button>
+            <button class="btn btn-secondary" type="button">Reset</button>
           </div>
         </div>
       </div>
