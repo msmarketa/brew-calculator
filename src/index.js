@@ -8,23 +8,27 @@ water.value = 128;
 ratio.value = 16;
 coffeeYield.value = water.value * 0.9;
 
-coffeeBeans.oninput = (event) => {
-  coffeeBeans.value = Number(event.target.value);
-
-  water.value = coffeeBeans.value * ratio.value;
+function countCoffeeYield() {
   coffeeYield.value = water.value * 0.9;
+}
+
+// TODO: all values must be > 0
+coffeeBeans.oninput = () => {
+  water.value = coffeeBeans.value * ratio.value;
+  countCoffeeYield();
 };
 
-water.oninput = (event) => {
-  water.value = Number(event.target.value);
-
+water.oninput = () => {
   ratio.value = water.value / coffeeBeans.value;
-  coffeeYield.value = water.value * 0.9;
+  countCoffeeYield();
 };
 
-ratio.oninput = (event) => {
-  ratio.value = Number(event.target.value);
-
+ratio.oninput = () => {
   water.value = coffeeBeans.value * ratio.value;
-  coffeeYield.value = water.value * 0.9;
+  countCoffeeYield();
 };
+
+coffeeYield.oninput = () => {
+  water.value = parseFloat(coffeeYield.value / 0.9).toFixed(1);
+  coffeeBeans.value = parseFloat(water.value / ratio.value).toFixed(1);
+}
