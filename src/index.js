@@ -29,6 +29,6 @@ ratio.oninput = () => {
 };
 
 coffeeYield.oninput = () => {
-  water.value = parseFloat(coffeeYield.value / 0.9).toFixed(1);
-  coffeeBeans.value = parseFloat(water.value / ratio.value).toFixed(1);
+  water.value = Math.round(coffeeYield.value / 0.9 * 10 ) / 10;
+  coffeeBeans.value = Math.round(water.value / ratio.value * 10 ) / 10;
 }
