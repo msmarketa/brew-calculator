@@ -45,13 +45,11 @@ const resetBtn = document.getElementById("reset-btn");
 timer.value = 10;
 countdown.value = `${timer.value}:00`;
 
-let totalSec = timer.value * 60;
-let counterId;
+let totalSec, counterId;
 
-timer.addEventListener("input", () => {
+function minsToSecs() {
   totalSec = timer.value * 60;
-  updateValue();
-});
+}
 
 function updateValue() {
   countdown.value = `${Math.floor(totalSec / 60)}:${(totalSec % 60)
@@ -60,15 +58,16 @@ function updateValue() {
 }
 
 function decreaseValue() {
-  if (totalSec >= 0) {
-    updateValue();
+  if (totalSec > 0) {
     totalSec--;
+    updateValue();
   } else {
     stopTimer();
   }
 }
 
 function runTimer() {
+  minsToSecs();
   counterId = setInterval(decreaseValue, 1000);
 }
 
@@ -82,10 +81,17 @@ const stopTimer = () => {
 
 const resetTimer = () => {
   stopTimer();
-  totalSec = timer.value * 60;
-  decreaseValue();
+  minsToSecs();
+  updateValue();
 };
+
+timer.addEventListener("input", () => {
+  minsToSecs();
+  updateValue();
+});
 
 startBtn.addEventListener("click", startTimer);
 stopBtn.addEventListener("click", stopTimer);
 resetBtn.addEventListener("click", resetTimer);
+
+document.onload = resetTimer();
