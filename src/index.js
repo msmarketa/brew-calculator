@@ -18,7 +18,7 @@ coffeeBeans.oninput = () => {
 };
 
 water.oninput = () => {
-  ratio.value = water.value / coffeeBeans.value;
+  ratio.value = Math.round(water.value / coffeeBeans.value / 10) * 10;
   countCoffeeYield();
 };
 
@@ -28,9 +28,9 @@ ratio.oninput = () => {
 };
 
 coffeeYield.oninput = () => {
-  water.value = Math.round(coffeeYield.value / 0.9 * 10 ) / 10;
-  coffeeBeans.value = Math.round(water.value / ratio.value * 10 ) / 10;
-}
+  water.value = Math.round((coffeeYield.value / 0.9) * 10) / 10;
+  coffeeBeans.value = Math.round((water.value / ratio.value) * 10) / 10;
+};
 
 ///////////////////////////////////////////////////////////////
 // TIMER
@@ -48,13 +48,15 @@ countdown.value = `${timer.value}:00`;
 let totalSec = timer.value * 60;
 let counterId;
 
-timer.addEventListener('input', () => {
+timer.addEventListener("input", () => {
   totalSec = timer.value * 60;
   updateValue();
 });
 
 function updateValue() {
-  countdown.value = `${Math.floor(totalSec / 60)}:${(totalSec % 60).toString().padStart(2, "0")}`;
+  countdown.value = `${Math.floor(totalSec / 60)}:${(totalSec % 60)
+    .toString()
+    .padStart(2, "0")}`;
 }
 
 function decreaseValue() {
@@ -72,17 +74,17 @@ function runTimer() {
 
 const startTimer = () => {
   runTimer();
-}
+};
 
 const stopTimer = () => {
   clearInterval(counterId);
-}
+};
 
 const resetTimer = () => {
   stopTimer();
   totalSec = timer.value * 60;
   decreaseValue();
-}
+};
 
 startBtn.addEventListener("click", startTimer);
 stopBtn.addEventListener("click", stopTimer);

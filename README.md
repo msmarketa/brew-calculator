@@ -1,4 +1,4 @@
-# Coffee brewing calculator for [Generic Hipster Coffee](ghc.viktor.coreskill.tech)
+# Coffee brewing calculator
 
 ## First time installation
 
@@ -54,7 +54,7 @@ Folders and files from `/src/static/` are just copied directly to `/dist/` folde
 
 ### Libraries
 
-This website is made with [Bootstrap 4 beta](https://getbootstrap.com/).
+This website is made with [Bootstrap 5](https://getbootstrap.com/).
 
 <!--
 Not necessary components are commented out to reduce final 'index.css' file size. 
