@@ -67,7 +67,6 @@ function decreaseValue() {
 }
 
 function runTimer() {
-  minsToSecs();
   counterId = setInterval(decreaseValue, 1000);
 }
 
