@@ -8,45 +8,49 @@ water.value = 128;
 ratio.value = 16;
 coffeeYield.value = water.value * 0.9;
 
-function isValid() {
+function checkValidity() {
   const elements = [coffeeBeans, water, ratio, coffeeYield, timer];
   elements.forEach((element) => {
     if (element.value >= 1) {
-      element.classList.add('is-valid');
-      element.classList.remove('is-invalid');
+      element.classList.add("is-valid");
+      element.classList.remove("is-invalid");
     } else {
-      element.classList.add('is-invalid');
-      element.classList.remove('is-valid');
+      element.classList.add("is-invalid");
+      element.classList.remove("is-valid");
     }
-  })
+  });
+}
+
+function roundNum(num) {
+  return Math.round(num * 10) / 10;
 }
 
 function countCoffeeYield() {
-  coffeeYield.value = Math.round(water.value * 0.9 * 10) / 10;
+  coffeeYield.value = roundNum(water.value * 0.9);
 }
 
-coffeeBeans.addEventListener('input', () => {
-  water.value = Math.round(coffeeBeans.value * ratio.value * 10) / 10;
+coffeeBeans.addEventListener("input", () => {
+  water.value = roundNum(coffeeBeans.value * ratio.value);
   countCoffeeYield();
-  isValid();
+  checkValidity();
 });
 
-water.addEventListener('input', () => {
-  ratio.value = Math.round(water.value / coffeeBeans.value / 10) * 10;
+water.addEventListener("input", () => {
+  ratio.value = roundNum(water.value / coffeeBeans.value);
   countCoffeeYield();
-  isValid();
+  checkValidity();
 });
 
-ratio.addEventListener('input', () => {
-  water.value = Math.round(coffeeBeans.value * ratio.value * 10) / 10;
+ratio.addEventListener("input", () => {
+  water.value = roundNum(coffeeBeans.value * ratio.value);
   countCoffeeYield();
-  isValid();
+  checkValidity();
 });
 
-coffeeYield.addEventListener('input', () => {
-  water.value = Math.round((coffeeYield.value / 0.9) * 10) / 10;
-  coffeeBeans.value = Math.round((water.value / ratio.value) * 10) / 10;
-  isValid();
+coffeeYield.addEventListener("input", () => {
+  water.value = roundNum(coffeeYield.value / 0.9);
+  coffeeBeans.value = roundNum(water.value / ratio.value);
+  checkValidity();
 });
 
 ///////////////////////////////////////////////////////////////
@@ -109,7 +113,7 @@ const resetTimer = () => {
 timer.addEventListener("input", () => {
   minsToSecs();
   updateValue();
-  isValid();
+  checkValidity();
 });
 
 startBtn.addEventListener("click", startTimer);

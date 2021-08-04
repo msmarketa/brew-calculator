@@ -1,9 +1,9 @@
-.is-valid:valid, 
+.is-valid:valid,
 .is-invalid:invalid,
 .form-control.is-valid,
 .form-control.is-invalid,
 .was-validated .form-control:valid,
 .was-validated .form-control:invalid {
-    background: none;
-    padding-right: 0.5rem;
-  }
+  background: none;
+  padding-right: 0.5rem;
+}
