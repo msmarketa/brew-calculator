@@ -3,6 +3,7 @@ const water = document.getElementById("water");
 const ratio = document.getElementById("ratio");
 const coffeeYield = document.getElementById("coffee-yield");
 
+const allInputs = [coffeeBeans, water, ratio, coffeeYield];
 let lastInputs = [coffeeBeans, water];
 
 coffeeBeans.value = 8;
@@ -31,88 +32,41 @@ function countCoffeeYield() {
   coffeeYield.value = roundNum(water.value * 0.9);
 }
 
-coffeeBeans.addEventListener("input", () => {
-  if (!lastInputs[0] === coffeeBeans) {
-    lastInputs.unshift(coffeeBeans);
-    lastInputs.pop();
-  }
+allInputs.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    if (lastInputs[0] != e.target) {
+      lastInputs.unshift(e.target);
+      lastInputs.pop();
+    }
 
-  if (lastInputs.includes(water)) {
-    ratio.value = roundNum(water.value / coffeeBeans.value);
-    countCoffeeYield();
-    console.log('beans + water');
-  } else if (lastInputs.includes(ratio)) {
-    water.value = roundNum(coffeeBeans.value * ratio.value);
-    countCoffeeYield();
-    console.log('beans + ratio');
-  } else {
-    water.value = roundNum(coffeeBeans.value * ratio.value);
-    ratio.value = roundNum(water.value / coffeeBeans.value);
-    console.log('beans + yield');
-  }
+    if (lastInputs.includes(coffeeBeans)) {
+      if (lastInputs.includes(water)) {
+        ratio.value = roundNum(water.value / coffeeBeans.value);
+        countCoffeeYield();
+      } else if (lastInputs.includes(ratio)) {
+        water.value = roundNum(coffeeBeans.value * ratio.value);
+        countCoffeeYield();
+      } else {
+        ratio.value = roundNum(water.value / coffeeBeans.value);
+        water.value = roundNum(coffeeYield.value / 0.9);
+      } 
+    } else if (lastInputs.includes(water)) {
+      if (lastInputs.includes(ratio)) {
+        coffeeBeans.value = roundNum(water.value / ratio.value);
+        countCoffeeYield();
+      } else if (lastInputs[0] === coffeeYield) {
+        water.value = roundNum(coffeeYield.value / 0.9);
+      } else  {
+        countCoffeeYield();
+      }
+    } else {
+      water.value = roundNum(coffeeYield.value / 0.9);
+      coffeeBeans.value = roundNum(water.value / ratio.value);
+    }
 
-  checkValidity();
-});
-
-water.addEventListener("input", () => {
-  if (!lastInputs[0] === water) {
-    lastInputs.unshift(water);
-    lastInputs.pop();
-  }
-
-  if (lastInputs.includes(coffeeBeans)) {
-    ratio.value = roundNum(water.value / coffeeBeans.value);
-    countCoffeeYield();
-  } else if (lastInputs.includes(ratio)) {
-    coffeeBeans.value = roundNum(water.value / ratio.value);
-  } else {
-    countCoffeeYield();
-  }
-
-  checkValidity();
-});
-
-ratio.addEventListener("input", () => {
-  if (!lastInputs[0] === ratio) {
-    lastInputs.unshift(ratio);
-    lastInputs.pop();
-  }
-
-  if (lastInputs.includes(water)) {
-    coffeeBeans.value = roundNum(water.value / ratio.value);
-    countCoffeeYield();
-  } else if (lastInputs.includes(coffeeYield)) {
-    water.value = roundNum(coffeeBeans.value * ratio.value);
-    coffeeBeans.value = roundNum(water.value / ratio.value);
-  } else {
-    water.value = roundNum(coffeeBeans.value * ratio.value);
-    countCoffeeYield();
-  }
-
-  checkValidity();
-});
-
-coffeeYield.addEventListener("input", () => {
-  if (!lastInputs[0] === coffeeYield) {
-    lastInputs.unshift(coffeeYield);
-    lastInputs.pop();
-  }
-
-  if (lastInputs.includes(ratio)) {
-    coffeeBeans.value = roundNum(water.value / ratio.value);
-    water.value = roundNum(coffeeYield.value / 0.9);
-    console.log('yield + ratio');
-  } else if (lastInputs.includes(coffeeBeans)) {
-    water.value = roundNum(coffeeYield.value / 0.9);
-    ratio.value = roundNum(water.value / coffeeBeans.value);
-    console.log('yield + beans');
-  } else {
-    water.value = roundNum(coffeeYield.value / 0.9);
-    console.log('yield + water');
-  }
-
-  checkValidity();
-});
+    checkValidity();
+  })
+})
 
 ///////////////////////////////////////////////////////////////
 // TIMER
