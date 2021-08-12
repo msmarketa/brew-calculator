@@ -1,3 +1,11 @@
+body {
+  background: linear-gradient(to right, #bcc7d0, #eef2f3);
+}
+
+.container {
+  box-shadow: 0 8px 6px rgb(0 0 0 / 2%), 0 22px 22px rgb(0 0 0 / 3%), 0 85px 99px rgb(0 0 0 / 4%);
+}
+
 .is-valid:valid,
 .is-invalid:invalid,
 .form-control.is-valid,
